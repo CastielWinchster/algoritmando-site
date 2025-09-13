@@ -40,3 +40,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 5000); // tempo em ms (1.2s)
   };
 });
+
+// Menu hamburguer responsivo
+document.addEventListener('DOMContentLoaded', function () {
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('menu');
+
+  hamburger.addEventListener('click', function () {
+    hamburger.classList.toggle('active');
+    menu.classList.toggle('active');
+  });
+});
