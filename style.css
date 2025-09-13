@@ -318,44 +318,117 @@ body {
 
 /* Menu responsivo */
 @media (max-width: 900px) {
+  /* garante que a navbar seja referência para posicionamento absoluto do menu */
+  .navbar {
+    position: relative;
+    overflow: visible; /* importante para que o X não seja cortado */
+  }
+
   .hamburger {
     display: flex;
+    z-index: 1400; /* X acima do menu */
+    position: relative;
+    margin-left: 12px; /* garante espaçamento mínimo do logo */
   }
 
+  /* menu posicionado ao lado do X (a partir da borda esquerda da navbar) */
   .menu {
     position: absolute;
-    top: 100px;
-    right: 20px;
-    background: #1E1E1E;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+    left: 70px;               /* ajuste fino para colocar ao lado do X */
+    top: 48%;
+    transform: translateY(-40%);
+    background: rgba(20,20,20,0.96);
+    display: none;            /* mostrado quando .menu.active */
+    flex-direction: row;      /* horizontal */
+    gap: 16px;
+    padding: 10px 16px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    display: none;
-    z-index: 1000;
-    min-width: 180px;
-    align-items: flex-start;
+    box-shadow: 0 8px 30px rgba(115, 66, 179, 0.384);
+    z-index: 1200;
+    align-items: center;
+    white-space: nowrap;
+    min-width: auto;
+    pointer-events: auto;
+    max-width: calc(100% - 120px);
+    /* estado inicial para animação do container */
+    opacity: 0;
+    transform-origin: left center;
   }
 
+  /* animação "pop" do container do menu quando ativado */
   .menu.active {
     display: flex;
+    animation: menuPop 260ms cubic-bezier(.22,.9,.32,1) forwards;
   }
 
+  @keyframes menuPop {
+    from {
+      opacity: 0;
+      transform: translateY(-12px) scale(0.98);
+      filter: blur(1px);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(4px) scale(1.02);
+      filter: blur(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: none;
+    }
+  }
+
+  /* animação por item (staggered) */
   .menu a {
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 1rem;
     font-weight: 500;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.25s ease, transform 0.22s ease;
+    display: inline-block;
+    padding: 6px 8px;
+    line-height: 1;
+    opacity: 0;                       /* inicia invisível */
+    transform: translateY(8px) scale(0.98); /* leve deslocamento */
+    will-change: transform, opacity;
+    /* aplica a animação de entrada (será atrasada por nth-child abaixo) */
+    animation: menuItemIn 360ms cubic-bezier(.22,.9,.32,1) forwards;
   }
+
+  @keyframes menuItemIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+      filter: blur(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: none;
+    }
+  }
+
+  /* Staggered delays — ajuste os tempos se necessário */
+  .menu.active a:nth-child(1) { animation-delay: 0.06s; }
+  .menu.active a:nth-child(2) { animation-delay: 0.14s; }
+  .menu.active a:nth-child(3) { animation-delay: 0.22s; }
+  .menu.active a:nth-child(4) { animation-delay: 0.30s; }
+  .menu.active a:nth-child(5) { animation-delay: 0.38s; }
 
   .menu a:hover {
     color: #ff00aa;
+    transform: translateY(-2px) scale(1.02);
   }
 
+  /* assegura que o X não seja tocado pelo menu */
+  .hamburger.active {
+    z-index: 1500;
+  }
+
+  /* adapta barra de busca para mobile sem empurrar o menu */
   .search-container {
-    margin-top: 20px;
+    margin-top: 18px;
     width: 100%;
   }
 }
