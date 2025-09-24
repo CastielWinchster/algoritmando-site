@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Algoritmando</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile-menu.css">
+  <link rel="stylesheet" href="loading.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
@@ -13,34 +15,43 @@
     <div class="loader"></div>
     <span class="loading-text">Aguarde...</span>
   </div>
+
+  <div class="mobile-menu-overlay" id="mobile-menu">
+    <button class="close-btn" id="close-btn">&times;</button>
+    <ul class="mobile-menu-links">
+      <li><a href="#">Sobre Nós</a></li>
+      <li><a href="#">Login</a></li>
+      <li><a href="#">Contato</a></li>
+    </ul>
+  </div>
   
+  <!-- Navbar -->
   <header>
     <nav class="navbar">
-      <div class="logo">
-        <img src="assets/logo.png" alt="Logo Algoritmando">
-      </div>
+  <div class="logo">
+    <img src="assets/logo.png" alt="Logo Algoritmando">
+  </div>
 
-      <div class="menu-wrapper">
-        <div class="hamburger" id="hamburger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <ul class="menu" id="menu">
-          <li><a href="#">Sobre Nós</a></li>
-          <li><a href="#">Login</a></li>
-          <li><a href="#">Contato</a></li>
-        </ul>
-      </div>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 
-      <div class="search-container">
-        <span class="clear-icon"><i class="fa-solid fa-xmark"></i></span>
-        <input type="text" placeholder="Buscar..." class="search" id="searchInput">
-        <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-      </div>
-    </nav>
-  </header>
+  <ul class="menu" id="menu">
+    <li><a href="#">Sobre Nós</a></li>
+    <li><a href="#">Login</a></li>
+    <li><a href="#">Contato</a></li>
+  </ul>
 
+  <div class="search-container">
+    <span class="clear-icon"><i class="fa-solid fa-xmark"></i></span>
+    <input type="text" placeholder="Buscar..." class="search" id="searchInput">
+    <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+  </div>
+</nav>
+
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-text">
       <h1>Olá, seja bem-vindo(a) <br> à Algoritmando!</h1>
@@ -52,5 +63,6 @@
   </section>
 
   <script src="script.js"></script>
+  <script src="mobile-menu.js"></script>
 </body>
 </html>
