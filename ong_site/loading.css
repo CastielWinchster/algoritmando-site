@@ -1,0 +1,50 @@
+/* Tela de Carregamento */
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #9100f1;
+  clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
+  animation: l1 2s infinite cubic-bezier(0.3,1,0,1);
+}
+@keyframes l1 {
+  33% {border-radius: 0;background: #ff009d ;clip-path: polygon(0 0,100% 0,100% 100%,0 100%)}
+  66% {border-radius: 0;background: #0364f7 ;clip-path: polygon(50% 0,50% 0,100% 100%,0 100%)}
+}
+
+/* Loading Screen */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* Gradiente animado igual ao fundo da página */
+  background: linear-gradient(180deg, #0a0f1c, #16203a, #2d2352, #181a2b);
+  background-size: 100% 300%;
+  animation: gradientMoveDown 30s linear infinite;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.6s;
+}
+
+#loading-screen .loader {
+  margin-bottom: 24px;
+}
+
+.loading-text {
+  color: #fff;
+  font-family: 'Poppins', 'Arial', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+/* Esconde a tela de loading */
+#loading-screen.hide {
+  opacity: 0;
+  pointer-events: none;
+}

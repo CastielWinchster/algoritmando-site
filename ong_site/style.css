@@ -27,12 +27,12 @@ body {
   }
 }
 
-/* Navbar */
+/* Navbar (Desktop) */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 80px 0 80px; /* mais espaçamento lateral e topo */
+  padding: 30px 80px 0 80px;
   background: transparent;
   min-height: 100px;
 }
@@ -46,7 +46,7 @@ body {
 }
 
 .logo img {
-  height: 70px;      /* ajusta o tamanho */
+  height: 70px;
   width: auto;
   cursor: pointer;
   margin-left: -20px;
@@ -54,15 +54,15 @@ body {
 }
 
 .logo img:hover {
-  transform: scale(1.12);  /* aumenta levemente */
-  filter: drop-shadow(0 0 10px rgba(155, 89, 182, 0.8)); /* brilho */
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 10px rgba(155, 89, 182, 0.8));
 }
 
 .menu {
   list-style: none;
   display: flex;
   gap: 40px;
-  margin-left: 0; /* alinhado ao logo */
+  margin-left: 0;
 }
 
 .menu a {
@@ -89,16 +89,16 @@ body {
   display: flex;
   align-items: center;
   position: relative;
-  width: 260px; /* Tamanho padrão da barra */
+  width: 260px;
   transition: width 0.4s cubic-bezier(.68,-0.55,.27,1.55);
 }
 
 .search-container:focus-within {
-  width: 340px; /* Expande suavemente ao focar */
+  width: 340px;
 }
 
 .search {
-  width: 100%; /* Ocupa toda a largura do container */
+  width: 100%;
   padding: 10px 38px 10px 38px;
   border-radius: 10px;
   border: none;
@@ -229,206 +229,9 @@ body {
   }
 }
 
-/* Tela de Carregamento */
-.loader {
-  width: 40px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #9100f1;
-  clip-path: polygon(0 0,100% 0,100% 100%,0 100%);
-  animation: l1 2s infinite cubic-bezier(0.3,1,0,1);
-}
-@keyframes l1 {
-  33% {border-radius: 0;background: #ff009d ;clip-path: polygon(0 0,100% 0,100% 100%,0 100%)}
-  66% {border-radius: 0;background: #0364f7 ;clip-path: polygon(50% 0,50% 0,100% 100%,0 100%)}
-}
-
-/* Loading Screen */
-#loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  /* Gradiente animado igual ao fundo da página */
-  background: linear-gradient(180deg, #0a0f1c, #16203a, #2d2352, #181a2b);
-  background-size: 100% 300%;
-  animation: gradientMoveDown 30s linear infinite;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transition: opacity 0.6s;
-}
-
-#loading-screen .loader {
-  margin-bottom: 24px;
-}
-
-.loading-text {
-  color: #fff;
-  font-family: 'Poppins', 'Arial', sans-serif;
-  font-size: 1.2rem;
-  letter-spacing: 2px;
-  opacity: 0.8;
-}
-
-/* Esconde a tela de loading */
-#loading-screen.hide {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Botão hamburguer */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  z-index: 1001;
-  position: relative;
-}
-
-.hamburger span {
-  display: block;
-  width: 24px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
-  margin: 4px 0;
-  transition: all 0.3s ease;
-}
-
-/* Animação para virar X */
-.hamburger.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-
-/* Menu responsivo */
-@media (max-width: 900px) {
-  /* garante que a navbar seja referência para posicionamento absoluto do menu */
-  .navbar {
-    position: relative;
-    overflow: visible; /* importante para que o X não seja cortado */
-  }
-
+/* Oculta o menu de hambúrguer e a busca em telas grandes */
+@media (min-width: 901px) {
   .hamburger {
-    display: flex;
-    z-index: 1400; /* X acima do menu */
-    position: relative;
-    margin-left: 12px; /* garante espaçamento mínimo do logo */
-  }
-
-  /* menu posicionado ao lado do X (a partir da borda esquerda da navbar) */
-  .menu {
-    position: absolute;
-    left: 70px;               /* ajuste fino para colocar ao lado do X */
-    top: 48%;
-    transform: translateY(-40%);
-    background: rgba(20,20,20,0.96);
-    display: none;            /* mostrado quando .menu.active */
-    flex-direction: row;      /* horizontal */
-    gap: 16px;
-    padding: 10px 16px;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(115, 66, 179, 0.384);
-    z-index: 1200;
-    align-items: center;
-    white-space: nowrap;
-    min-width: auto;
-    pointer-events: auto;
-    max-width: calc(100% - 120px);
-    /* estado inicial para animação do container */
-    opacity: 0;
-    transform-origin: left center;
-  }
-
-  /* animação "pop" do container do menu quando ativado */
-  .menu.active {
-    display: flex;
-    animation: menuPop 260ms cubic-bezier(.22,.9,.32,1) forwards;
-  }
-
-  @keyframes menuPop {
-    from {
-      opacity: 0;
-      transform: translateY(-12px) scale(0.98);
-      filter: blur(1px);
-    }
-    60% {
-      opacity: 1;
-      transform: translateY(4px) scale(1.02);
-      filter: blur(0);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: none;
-    }
-  }
-
-  /* animação por item (staggered) */
-  .menu a {
-    color: rgb(255, 255, 255);
-    font-size: 1rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: color 0.25s ease, transform 0.22s ease;
-    display: inline-block;
-    padding: 6px 8px;
-    line-height: 1;
-    opacity: 0;                       /* inicia invisível */
-    transform: translateY(8px) scale(0.98); /* leve deslocamento */
-    will-change: transform, opacity;
-    /* aplica a animação de entrada (será atrasada por nth-child abaixo) */
-    animation: menuItemIn 360ms cubic-bezier(.22,.9,.32,1) forwards;
-  }
-
-  @keyframes menuItemIn {
-    from {
-      opacity: 0;
-      transform: translateY(8px) scale(0.98);
-      filter: blur(2px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: none;
-    }
-  }
-
-  /* Staggered delays — ajuste os tempos se necessário */
-  .menu.active a:nth-child(1) { animation-delay: 0.06s; }
-  .menu.active a:nth-child(2) { animation-delay: 0.14s; }
-  .menu.active a:nth-child(3) { animation-delay: 0.22s; }
-  .menu.active a:nth-child(4) { animation-delay: 0.30s; }
-  .menu.active a:nth-child(5) { animation-delay: 0.38s; }
-
-  .menu a:hover {
-    color: #ff00aa;
-    transform: translateY(-2px) scale(1.02);
-  }
-
-  /* assegura que o X não seja tocado pelo menu */
-  .hamburger.active {
-    z-index: 1500;
-  }
-
-  /* adapta barra de busca para mobile sem empurrar o menu */
-  .search-container {
-    margin-top: 18px;
-    width: 100%;
+    display: none;
   }
 }
